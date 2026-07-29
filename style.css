@@ -1,0 +1,420 @@
+
+
+:root {  /* CSS variables: define once, use many times */
+  
+  --text-dark: #fff0e0;
+  --accent: cyan;
+ 
+}
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color:white;
+}
+ 
+body {
+  /* background:rgb(2, 146, 2); */
+  background-color: #000000;
+  background-size: cover;
+  
+}
+ 
+header h1 {
+  background: var(--accent);
+  padding: 12px 20px;
+  font-size: 2rem;
+}
+ 
+/* the <ul> itself: layout + remove bullets */
+.buttons {
+  display: flex;
+   flex-direction: row;   /* make nav to be row */
+  gap: 6px;
+  list-style: none;
+  padding: 20px;
+}
+ 
+/* the actual clickable elements: reset button UA styles, then style them */
+.buttons button {
+  all: unset;               
+  cursor: pointer;
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border: 1px solid #999;
+  border-radius: 2px;
+  transition: border-color 0.25s ease, opacity 0.25s ease;
+  opacity: 0.85;
+}
+ 
+.buttons button:hover,
+.buttons button:focus-visible {
+  opacity: 1;
+  border-color: var(--text-dark);
+}
+ 
+.buttons button.active-link {
+  border-color: var(--text-dark);
+  opacity: 1;
+}
+.leftbox{
+  width:100%;
+  float:left;
+  background-color: #faf9f917;
+  border:2px solid #f5f5f5;
+  color: white;
+  
+ 
+}
+ .leftimg {
+  float: right;
+  background-color: #ffffffc4;
+}
+.leftimgy{
+  float: right;
+  background-color: #ffffffc4;
+  rotate: 270deg;
+
+}
+
+.rightbox{
+   width: 50%;
+  float:right;
+ background-color: #faf9f917;
+  border:2px solid #fffcfc;
+  color: white;
+}
+
+image#QRimg{
+  display: flex;
+  justify-content: flex-end;
+  background-color: #000000c4;
+}
+.ps{
+  padding:5px;
+  font-size:20px;
+  
+}
+.gamecontainer{
+  
+  border:4px solid #f5f2f2;
+}
+footer{
+  width:100%;
+  height:50px;
+  background-color: #faf5f57e;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:150px;
+}
+ 
+/* media queries only hold OVERRIDES for that breakpoint,
+   never your base/desktop styles */
+#tools {
+  margin: 20px;
+}
+ 
+.tool {
+  background-color: #ffcc00;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+ 
+.tool.selected {
+  background-color: #ff6600;
+  color: white;
+}
+ 
+#flasks {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px;
+}
+ 
+.flask {
+  position: relative;
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100px;
+  overflow: hidden;
+  transition: transform 0.15s ease;
+}
+ 
+.flask:hover {
+  background-color: #eee;
+  transform: scale(1.05);
+}
+ 
+.flask.correct {
+  animation: pop 0.5s ease;
+  background-color: #b6f5b6;
+}
+ 
+.flask.wrong {
+  animation: shake 0.4s ease;
+  background-color: #f5b6b6;
+}
+ 
+.burner {
+  position: relative;
+  font-size: 50px;
+}
+ 
+.flame {
+  position: absolute;
+  top: -18px;
+  left: 18px;
+  font-size: 22px;
+  animation: flicker 0.6s infinite alternate;
+}
+ 
+/* Rising bubbles inside each flask, always animating gently */
+.bubbles {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+}
+ 
+.bubbles span {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #99ddff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: rise 2.2s infinite ease-in;
+}
+ 
+.bubbles span:nth-child(1) { left: 30%; animation-delay: 0s; }
+.bubbles span:nth-child(2) { left: 50%; animation-delay: 0.7s; }
+.bubbles span:nth-child(3) { left: 65%; animation-delay: 1.3s; }
+ 
+#result {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  min-height: 28px;
+  animation: fadeIn 0.4s ease;
+}
+ 
+#score {
+  font-size: 18px;
+}
+ 
+.hidden {
+  display: none;
+}
+ 
+#guessPanel {
+  margin-top: 15px;
+  animation: fadeIn 0.4s ease;
+}
+ 
+.guess {
+  background-color: #3399ff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+ 
+.guess:hover {
+  background-color: #1a75d1;
+  transform: scale(1.05);
+}
+ 
+@keyframes flicker {
+  from { transform: scale(1) rotate(-2deg); opacity: 1; }
+  to   { transform: scale(1.15) rotate(2deg); opacity: 0.85; }
+}
+ 
+@keyframes rise {
+  0%   { bottom: 0; opacity: 0.8; }
+  100% { bottom: 60px; opacity: 0; }
+}
+ 
+@keyframes pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+ 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-6px);}
+  75%      { transform: translateX(6px); }
+}
+ 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width:800px){       /*  at mobile size */
+ #pagecontainer{
+    padding: 0 12px 24px;
+  }
+
+  .page{
+    width: 100%;
+    padding-top: 16px;
+  }
+
+  .page h1{
+    font-size: 1.4rem;
+    padding: 10px 0 4px;
+  }
+
+  /* ---- nav becomes a dropdown menu, toggled purely with the checkbox above ---- */
+  .nav.bar{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #000000;
+    border-bottom: 1px solid #333;
+  }
+
+  .nav-toggle{
+    display: block;
+    width: 100%;
+    text-align: left;
+    background-color: #000000;
+    color: var(--text-dark);
+    border: none;
+    padding: 12px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .buttons{
+    display: none;              /* collapsed by default */
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #000000;
+    border-bottom: 1px solid #333;
+    z-index: 20;
+  }
+
+  /* checking the hidden checkbox reveals the sibling <ul>, no JS involved */
+  .nav-toggle-checkbox:checked ~ .buttons{
+    display: flex;
+  }
+
+  .buttons li{
+    list-style: none;
+    width: 100%;
+  }
+
+  .buttons button{
+    all: unset;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    border-top: 1px solid #222;
+    cursor: pointer;
+  }
+
+  /* ---- content boxes: stack instead of float ---- */
+  .leftbox,
+  .rightbox{
+    float: none;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .leftimg,
+  .leftimgy{
+    float: none;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto 8px;
+    rotate: none; /* undo the desktop 270deg rotation */
+  }
+
+  .ps{
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* ---- decorative background/atom images: hide, they only add clutter on small screens ---- */
+  img#bg{
+    display: none;
+  }
+
+  /* ---- footer QR code ---- */
+  footer{
+    display: none; /* hide QR code, it's meant for scanning on a bigger screen */
+  }
+
+  /* ---- game page ---- */
+  .leftbox5,
+  .rightbox5{
+    width: 100%;
+    float: none;
+    margin-bottom: 10px;
+  }
+
+  .gamecontainer{
+    padding: 12px;
+  }
+
+  #tools{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 12px 0;
+  }
+
+  .tool{
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  #flasks{
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .flask{
+    width: 90px;
+  }
+
+  #guessPanel{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
