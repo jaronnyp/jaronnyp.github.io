@@ -1,0 +1,582 @@
+
+
+:root {  /* CSS variables: define once, use many times */
+  
+  --text-dark: #fff0e0;
+  --accent: cyan;
+ 
+}
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color:white;
+}
+ 
+body {
+  /* background:rgb(2, 146, 2); */
+  background-color: #000000;
+  background-size: cover;
+  
+}
+ 
+header h1 {
+  background: var(--accent);
+  padding: 12px 20px;
+  font-size: 2rem;
+}
+ 
+/* the <ul> itself: layout + remove bullets */
+.buttons {
+  display: flex;
+   flex-direction: row;   /* make nav to be row */
+  gap: 6px;
+  list-style: none;
+  padding: 20px;
+}
+ 
+/* the actual clickable elements: reset button UA styles, then style them */
+.buttons button {
+  all: unset;               
+  cursor: pointer;
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border: 1px solid #999;
+  border-radius: 2px;
+  transition: border-color 0.25s ease, opacity 0.25s ease;
+  opacity: 0.85;
+}
+ 
+.buttons button:hover,
+.buttons button:focus-visible {
+  opacity: 1;
+  border-color: var(--text-dark);
+}
+ 
+.buttons button.active-link {
+  border-color: var(--text-dark);
+  opacity: 1;
+}
+.leftbox{
+  width:100%;
+  float:left;
+  background-color: #faf9f917;
+  border:2px solid #f5f5f5;
+  color: white;
+  
+ 
+}
+ .leftimg {
+  float: right;
+  background-color: #ffffffc4;
+}
+.leftimgy{
+  float: right;
+  background-color: #ffffffc4;
+  rotate: 270deg;
+
+}
+
+.rightbox{
+   width: 50%;
+  float:right;
+ background-color: #faf9f917;
+  border:2px solid #fffcfc;
+  color: white;
+}
+
+image#QRimg{
+  display: flex;
+  justify-content: flex-end;
+  background-color: #000000c4;
+}
+.ps{
+  padding:5px;
+  font-size:20px;
+  
+}
+.gamecontainer{
+  
+  border:4px solid #f5f2f2;
+}
+footer{
+  width:100%;
+  height:50px;
+  background-color: #faf5f57e;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:150px;
+}
+ 
+/* =========================================================
+   GAS LAB: IDLE CHEMIST — game styling
+   ========================================================= */
+.hidden {
+  display: none;
+}
+
+.gamecontainer {
+  padding: 20px;
+}
+
+.tagline {
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+/* ---- stat bar ---- */
+#statbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.stat {
+  flex: 1 1 140px;
+  background-color: #ffffff0f;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.statlabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.65;
+}
+
+.statvalue {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ---- start / pause controls ---- */
+#gameControls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+#startBtn,
+#pauseBtn {
+  all: unset;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+#startBtn {
+  background-color: var(--accent);
+  color: #000;
+}
+
+#pauseBtn {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+#startBtn:hover,
+#pauseBtn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* ---- click area ---- */
+#clickArea {
+  position: relative;
+  text-align: center;
+  margin: 24px 0;
+}
+
+#mainFlask {
+  all: unset;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  padding: 20px 40px;
+}
+
+#mainFlask:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+#mainFlask .burner {
+  position: relative;
+  font-size: 70px;
+}
+
+#mainFlask .flame {
+  position: absolute;
+  top: -22px;
+  left: 30px;
+  font-size: 28px;
+  animation: flicker 0.6s infinite alternate;
+}
+
+#mainFlask.pulse {
+  animation: pop 0.2s ease;
+}
+
+#mainFlask .bubbles {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+}
+
+#mainFlask .bubbles span {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #99ddff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: rise 2.2s infinite ease-in;
+}
+
+#mainFlask .bubbles span:nth-child(1) { left: 40%; animation-delay: 0s; }
+#mainFlask .bubbles span:nth-child(2) { left: 55%; animation-delay: 0.7s; }
+#mainFlask .bubbles span:nth-child(3) { left: 65%; animation-delay: 1.3s; }
+
+#clickHint {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+#statePrompt {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 6px;
+}
+
+#floatLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floatnum {
+  position: absolute;
+  top: 20%;
+  font-weight: 700;
+  color: var(--accent);
+  animation: floatUp 0.9s ease forwards;
+}
+
+.floatnum.crit {
+  color: #ff6600;
+  font-size: 20px;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to   { transform: translateY(-50px); opacity: 0; }
+}
+
+/* ---- power-ups ---- */
+#powerups h2,
+#shop h2 {
+  border-bottom: 1px solid #444;
+  padding-bottom: 6px;
+  margin: 22px 0 10px;
+}
+
+.powerupgrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.powerup {
+  all: unset;
+  cursor: pointer;
+  flex: 1 1 200px;
+  background-color: #ffffff0f;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.powerup:hover:not(:disabled) {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.powerup:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.powerup.active {
+  border-color: #ffcc00;
+  background-color: #ffcc0022;
+}
+
+.pwicon { font-size: 24px; }
+.pwname { font-weight: 700; }
+.pwdesc { font-size: 13px; opacity: 0.75; }
+.pwstate {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+/* ---- shop ---- */
+#shopList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.shopitem {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: #ffffff0f;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 12px;
+  opacity: 0.55;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.shopitem.affordable {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+.shopitem:hover.affordable {
+  transform: translateY(-2px);
+}
+
+.shopname { font-weight: 700; }
+.shopowned { opacity: 0.6; font-weight: 400; }
+.shopdesc { font-size: 13px; opacity: 0.8; }
+.shopcost { font-size: 13px; color: var(--accent); font-weight: 700; }
+
+/* ---- ending screen ---- */
+#endingScreen {
+  margin-top: 24px;
+  text-align: center;
+  background-color: #ffffff0f;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 24px;
+  animation: fadeIn 0.4s ease;
+}
+
+#endingScreen h2 {
+  margin-bottom: 10px;
+}
+
+#endingSummary {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+#playAgainBtn {
+  all: unset;
+  cursor: pointer;
+  background-color: var(--accent);
+  color: #000;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+#playAgainBtn:hover {
+  opacity: 0.85;
+}
+
+@keyframes flicker {
+  from { transform: scale(1) rotate(-2deg); opacity: 1; }
+  to   { transform: scale(1.15) rotate(2deg); opacity: 0.85; }
+}
+ 
+@keyframes rise {
+  0%   { bottom: 0; opacity: 0.8; }
+  100% { bottom: 60px; opacity: 0; }
+}
+ 
+@keyframes pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+ 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-6px);}
+  75%      { transform: translateX(6px); }
+}
+ 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width:800px){       /*  at mobile size */
+ #pagecontainer{
+    padding: 0 12px 24px;
+  }
+
+  .page{
+    width: 100%;
+    padding-top: 16px;
+  }
+
+  .page h1{
+    font-size: 1.4rem;
+    padding: 10px 0 4px;
+  }
+
+  /* ---- nav becomes a dropdown menu, toggled purely with the checkbox above ---- */
+  .nav.bar{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #000000;
+    border-bottom: 1px solid #333;
+  }
+
+  .nav-toggle{
+    display: block;
+    width: 100%;
+    text-align: left;
+    background-color: #000000;
+    color: var(--text-dark);
+    border: none;
+    padding: 12px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .buttons{
+    display: none;              /* collapsed by default */
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #000000;
+    border-bottom: 1px solid #333;
+    z-index: 20;
+  }
+
+  /* checking the hidden checkbox reveals the sibling <ul>, no JS involved */
+  .nav-toggle-checkbox:checked ~ .buttons{
+    display: flex;
+  }
+
+  .buttons li{
+    list-style: none;
+    width: 100%;
+  }
+
+  .buttons button{
+    all: unset;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    border-top: 1px solid #222;
+    cursor: pointer;
+  }
+
+  /* ---- content boxes: stack instead of float ---- */
+  .leftbox,
+  .rightbox{
+    float: none;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .leftimg,
+  .leftimgy{
+    float: none;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto 8px;
+    rotate: none; /* undo the desktop 270deg rotation */
+  }
+
+  .ps{
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* ---- decorative background/atom images: hide, they only add clutter on small screens ---- */
+  img#bg{
+    display: none;
+  }
+
+  /* ---- footer QR code ---- */
+  footer{
+    display: none; /* hide QR code, it's meant for scanning on a bigger screen */
+  }
+
+  /* ---- game page ---- */
+  .leftbox5,
+  .rightbox5{
+    width: 100%;
+    float: none;
+    margin-bottom: 10px;
+  }
+
+  .gamecontainer{
+    padding: 12px;
+  }
+
+  #statbar{
+    flex-direction: column;
+  }
+
+  .stat{
+    flex: 1 1 auto;
+  }
+
+  #mainFlask .burner{
+    font-size: 54px;
+  }
+
+  .powerupgrid,
+  #shopList{
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+}
